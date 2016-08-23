@@ -96,4 +96,17 @@ public class Apple {
 		this.hasWorm = hasWorm;
 	}
 	
+	/**
+	 * Peel me.
+	 */
+	public void peelMe() {
+		
+	}
+	
+	/**
+	 * Eat me.
+	 */
+	public void eatMe() {
+		
+	}
 }

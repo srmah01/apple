@@ -100,4 +100,21 @@ public class AppleTest {
 		apple.setHasWorm(true);
 		assertTrue(apple.getHasWorm());
 	}
+	
+	/**
+	 * Can peel me.
+	 */
+	@Test
+	public void canPeelMe() {
+		apple.peelMe();
+	}
+	
+	/**
+	 * Can eat me.
+	 */
+	@Test
+	public void canEatMe() {
+		apple.peelMe();
+	}
+
 }
