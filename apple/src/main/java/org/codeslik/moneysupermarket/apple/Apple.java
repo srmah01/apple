@@ -1,5 +1,8 @@
 package org.codeslik.moneysupermarket.apple;
 
+import org.codeslik.moneysupermarket.apple.exception.AppleNotPeeledException;
+
+// TODO: Auto-generated Javadoc
 /**
  * The Apple Class.
  */
@@ -14,8 +17,11 @@ public class Apple {
 	/** The taste. */
 	private Integer taste;
 	
-	/** The has worm. */
+	/** The has worm flag. */
 	private Boolean hasWorm;
+	
+	/** The is peeled flag. */
+	private Boolean isPeeled = false;
 
 	/**
 	 * Gets the colour.
@@ -100,13 +106,16 @@ public class Apple {
 	 * Peel me.
 	 */
 	public void peelMe() {
-		
+		isPeeled = true;
 	}
 	
 	/**
 	 * Eat me.
+	 * @throws AppleNotPeeledException 
 	 */
-	public void eatMe() {
-		
+	public void eatMe() throws AppleNotPeeledException {
+		if (!isPeeled) {
+			throw new AppleNotPeeledException("Apple is not peeled.");
+		}
 	}
 }

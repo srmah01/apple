@@ -2,6 +2,7 @@ package org.codeslik.moneysupermarket.apple;
 
 import static org.junit.Assert.*;
 
+import org.codeslik.moneysupermarket.apple.exception.AppleNotPeeledException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -111,10 +112,21 @@ public class AppleTest {
 	
 	/**
 	 * Can eat me.
+	 * @throws AppleNotPeeledException 
 	 */
 	@Test
-	public void canEatMe() {
+	public void canEatMe() throws AppleNotPeeledException {
 		apple.peelMe();
+		apple.eatMe();
+	}
+
+	/**
+	 * Cannot eat me when unpeeled.
+	 * @throws AppleNotPeeledException 
+	 */
+	@Test(expected=AppleNotPeeledException.class)
+	public void cannotEatMeWhenUnpeeled() throws AppleNotPeeledException {
+		apple.eatMe();
 	}
 
 }
