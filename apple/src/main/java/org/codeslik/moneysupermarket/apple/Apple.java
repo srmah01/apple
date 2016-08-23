@@ -1,24 +1,38 @@
 package org.codeslik.moneysupermarket.apple;
 
 import org.codeslik.moneysupermarket.apple.exception.AppleNotPeeledException;
+import org.codeslik.moneysupermarket.apple.peeler.Peeler;
+import org.codeslik.moneysupermarket.apple.peeler.ValyrianSteelPeeler;
 
 /**
  * The Apple Class.
  */
 public class Apple {
 
+	/** The Constant MIN_WEIGHT. */
+	private static final int MIN_WEIGHT = 10;
+
+	/** The Constant MAX_WEIGHT. */
+	private static final int MAX_WEIGHT = 100;
+	
+	/** The Constant MIN_TASTE. */
+	private static final int MIN_TASTE = 1;
+
+	/** The Constant MAX_TASTE. */
+	private static final int MAX_TASTE = 4;
+
 	/** The colour. */
 	private Colour colour;
-	
+
 	/** The weight in grams. */
 	private Integer weight;
-	
+
 	/** The taste. */
 	private Integer taste;
-	
+
 	/** The has worm flag. */
 	private Boolean hasWorm;
-	
+
 	/** The is peeled flag. */
 	private Boolean isPeeled = false;
 
@@ -34,7 +48,8 @@ public class Apple {
 	/**
 	 * Sets the colour.
 	 *
-	 * @param colour the new colour
+	 * @param colour
+	 *            the new colour
 	 */
 	public void setColour(Colour colour) {
 		this.colour = colour;
@@ -50,12 +65,15 @@ public class Apple {
 	}
 
 	/**
-	 * Sets the weight in grams between the values 10 and 100.
+	 * Sets the weight in grams between the values MIN_WEIGHT and MAX_WEIGHT.
 	 *
-	 * @param weight the new weight
+	 * @param weight
+	 *            the new weight
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
 	 */
-	public void setWeight(Integer weight) {
-		if (weight < 10 || weight > 100) {
+	public void setWeight(Integer weight) throws IllegalArgumentException {
+		if (weight < MIN_WEIGHT || weight > MAX_WEIGHT) {
 			throw new IllegalArgumentException("Weight value is not within acceptable limits.");
 		}
 		this.weight = weight;
@@ -71,51 +89,77 @@ public class Apple {
 	}
 
 	/**
-	 * Sets the taste value between 1 and 4.
+	 * Sets the taste value between MIN_TASTE and MAX_TASTE.
 	 *
-	 * @param taste the new taste value
-	 * @throws IllegalArgumentException an illegal argument exception
+	 * @param taste
+	 *            the new taste value
+	 * @throws IllegalArgumentException
+	 *             an illegal argument exception
 	 */
 	public void setTaste(Integer taste) throws IllegalArgumentException {
-		if (taste < 1 || taste > 4) {
+		if (taste < MIN_TASTE || taste > MAX_TASTE) {
 			throw new IllegalArgumentException("Taste value is not within acceptable limits.");
 		}
 		this.taste = taste;
 	}
 
 	/**
-	 * Gets the checks for worm.
+	 * Gets the has worm flag.
 	 *
-	 * @return the checks for worm
+	 * @return the has worm flag
 	 */
 	public Boolean getHasWorm() {
 		return hasWorm;
 	}
 
 	/**
-	 * Sets the checks for worm.
+	 * Sets the has worm flag.
 	 *
-	 * @param hasWorm the new checks for worm
+	 * @param hasWorm
+	 *            the has worm flag
 	 */
 	public void setHasWorm(Boolean hasWorm) {
 		this.hasWorm = hasWorm;
 	}
-	
+
 	/**
-	 * Peel me.
-	 * @throws AppleNotPeeledException 
+	 * Gets the is peeled flag.
+	 *
+	 * @return the is peeled flag
 	 */
-	public void peelMe() throws AppleNotPeeledException {
-		if ((hasWorm == null || hasWorm) || 
-			(taste == null || taste <= 3)) {
+	public Boolean getIsPeeled() {
+		return isPeeled;
+	}
+
+	/**
+	 * Peel me with a given peeler.
+	 *
+	 * @param peeler
+	 *            the peeler to use
+	 * @throws AppleNotPeeledException
+	 *             the apple not peeled exception
+	 */
+	public void peelMe(Peeler peeler) throws AppleNotPeeledException {
+		if ((hasWorm == null || hasWorm) || (taste == null || taste <= 3) || colour == null) {
 			throw new AppleNotPeeledException("Apple cannot be peeled.");
 		}
-		isPeeled = true;
+
+		if (peeler == null) {
+			throw new AppleNotPeeledException("A peeler is required.");
+		}
+		
+		if (colour == Colour.Blue && !peeler.getClass().isAssignableFrom(ValyrianSteelPeeler.class)) {
+			throw new AppleNotPeeledException("Apple requires Valyrian Steel to peel.");
+		}
+
+		this.isPeeled = true;
 	}
-	
+
 	/**
 	 * Eat me.
-	 * @throws AppleNotPeeledException 
+	 *
+	 * @throws AppleNotPeeledException
+	 *             the apple not peeled exception
 	 */
 	public void eatMe() throws AppleNotPeeledException {
 		if (!isPeeled) {
