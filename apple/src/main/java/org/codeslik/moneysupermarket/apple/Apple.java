@@ -6,7 +6,7 @@ package org.codeslik.moneysupermarket.apple;
 public class Apple {
 
 	/** The colour. */
-	private String colour;
+	private Colour colour;
 	
 	/** The weight in grams. */
 	private Integer weight;
@@ -22,7 +22,7 @@ public class Apple {
 	 *
 	 * @return the colour
 	 */
-	public String getColour() {
+	public Colour getColour() {
 		return colour;
 	}
 
@@ -31,7 +31,7 @@ public class Apple {
 	 *
 	 * @param colour the new colour
 	 */
-	public void setColour(String colour) {
+	public void setColour(Colour colour) {
 		this.colour = colour;
 	}
 

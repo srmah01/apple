@@ -34,7 +34,7 @@ public class AppleTest {
 	 */
 	@Test
 	public void canSetColour() {
-		String expected = "Red";
+		Colour expected = Colour.Red;
 		apple.setColour(expected);
 		assertEquals(expected, apple.getColour());
 	}
