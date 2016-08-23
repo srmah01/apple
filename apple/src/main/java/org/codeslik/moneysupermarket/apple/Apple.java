@@ -8,7 +8,7 @@ public class Apple {
 	/** The colour. */
 	private String colour;
 	
-	/** The weight. */
+	/** The weight in grams. */
 	private Integer weight;
 	
 	/** The taste. */
@@ -45,11 +45,14 @@ public class Apple {
 	}
 
 	/**
-	 * Sets the weight.
+	 * Sets the weight in grams between the values 10 and 100.
 	 *
 	 * @param weight the new weight
 	 */
 	public void setWeight(Integer weight) {
+		if (weight < 10 || weight > 100) {
+			throw new IllegalArgumentException("Weight value is not within acceptable limits.");
+		}
 		this.weight = weight;
 	}
 
@@ -63,7 +66,7 @@ public class Apple {
 	}
 
 	/**
-	 * Sets the taste.
+	 * Sets the taste value between 1 and 4.
 	 *
 	 * @param taste the new taste value
 	 * @throws IllegalArgumentException an illegal argument exception

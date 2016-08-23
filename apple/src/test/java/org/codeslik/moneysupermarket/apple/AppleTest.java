@@ -50,6 +50,21 @@ public class AppleTest {
 		assertEquals(expected, apple.getWeight());
 	}
 
+	/**
+	 * Setting weight with argument below minimum throws.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void settingWeightWithArgumentBelowMinimumThrows() {
+		apple.setWeight(9);
+	}
+
+	/**
+	 * Setting weight with argument above maximum throws.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void settingWeightWithArgumentAboveMaximumThrows() {
+		apple.setWeight(101);
+	}
 	
 	/**
 	 * Can set taste.
