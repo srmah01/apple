@@ -104,18 +104,57 @@ public class AppleTest {
 	
 	/**
 	 * Can peel me.
+	 * @throws AppleNotPeeledException 
 	 */
 	@Test
-	public void canPeelMe() {
+	public void canPeelMe() throws AppleNotPeeledException {
+		apple.setHasWorm(false);
+		apple.setTaste(4);
 		apple.peelMe();
 	}
 	
+	/**
+	 * Can not peel me when has worm is set.
+	 *
+	 * @throws AppleNotPeeledException the apple not peeled exception
+	 */
+	@Test(expected=AppleNotPeeledException.class)
+	public void canNotPeelMeWhenHasWorm() throws AppleNotPeeledException {
+		apple.setHasWorm(true);
+		apple.setTaste(4);
+		apple.peelMe();
+	}
+	
+	/**
+	 * Can not peel me when taste is too low.
+	 *
+	 * @throws AppleNotPeeledException the apple not peeled exception
+	 */
+	@Test(expected=AppleNotPeeledException.class)
+	public void canNotPeelMeWhenTasteIsTooLow() throws AppleNotPeeledException {
+		apple.setHasWorm(false);
+		apple.setTaste(3);
+		apple.peelMe();
+	}
+
+	/**
+	 * Can not peel me when has worm or taste are not set.
+	 *
+	 * @throws AppleNotPeeledException the apple not peeled exception
+	 */
+	@Test(expected=AppleNotPeeledException.class)
+	public void canNotPeelMeWhenHasWormOrTasteAreNotSet() throws AppleNotPeeledException {
+		apple.peelMe();
+	}
+
 	/**
 	 * Can eat me.
 	 * @throws AppleNotPeeledException 
 	 */
 	@Test
 	public void canEatMe() throws AppleNotPeeledException {
+		apple.setHasWorm(false);
+		apple.setTaste(4);
 		apple.peelMe();
 		apple.eatMe();
 	}

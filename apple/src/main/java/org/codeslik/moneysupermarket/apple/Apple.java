@@ -2,7 +2,6 @@ package org.codeslik.moneysupermarket.apple;
 
 import org.codeslik.moneysupermarket.apple.exception.AppleNotPeeledException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Apple Class.
  */
@@ -104,8 +103,13 @@ public class Apple {
 	
 	/**
 	 * Peel me.
+	 * @throws AppleNotPeeledException 
 	 */
-	public void peelMe() {
+	public void peelMe() throws AppleNotPeeledException {
+		if ((hasWorm == null || hasWorm) || 
+			(taste == null || taste <= 3)) {
+			throw new AppleNotPeeledException("Apple cannot be peeled.");
+		}
 		isPeeled = true;
 	}
 	
